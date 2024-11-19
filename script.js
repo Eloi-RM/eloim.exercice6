@@ -1,10 +1,14 @@
 const textArea = document.querySelector('textarea')
 const button = document.querySelector('button')
 const para = document.querySelector('p')
+const para2 = document.querySelector('p2')
+
+let myDateInString = ""
 
 function isValidDate(myDate){
+    myDateInString = ""
+    
     const myArray = myDate.split('')
-    let myDateInArray = []
     console.log(myArray)
     
     const slashSplitArray = myDate.split('/')
@@ -35,7 +39,7 @@ function isValidDate(myDate){
             case '7' :
             case '8' :
             case '9' :
-                myDateInArray += myArray[i]
+                myDateInString += myArray[i]
                 break
             case '/' :
                 break
@@ -44,13 +48,14 @@ function isValidDate(myDate){
                 return false
         }
     }
-    console.log("my string = " + myDateInArray)
+    console.log("my string = " + myDateInString)
 
-    if (myDateInArray.length != 8){
+    if (myDateInString.length != 8){
         console.log("to long or to short")
         return false
     }
     else{
+        console.log("valid date")
         return true
     }
 }
@@ -92,7 +97,39 @@ function isValidDayAndMonth(myDay, myMonth){
     }
 }
 
-button.addEventListener('click', ()=> {
+function isPalindrome(myDate){
+    const myArray = myDate.split('')
+    let invertedDate = ""
+
+    for (i = 7; i > -1; i--){
+        console.log(myArray[i])
+        invertedDate += myArray[i]
+        console.log(myArray[i])
+        
+    }
+
+    if (invertedDate == myDate){
+        return true
+    }
+    else{
+        return false
+    }
+}
+
+function game(){
     const answer = isValidDate(textArea.value)
     para.innerText = answer
+    
+    if (answer){
+        if (isPalindrome(myDateInString)){
+            para2.innerText = "C'est un palindrome"
+        }
+        else{
+            para2.innerText = "Ce n'est pas un palindrome"
+        }
+    }
+}
+
+button.addEventListener('click', ()=> {
+    game()
 })
