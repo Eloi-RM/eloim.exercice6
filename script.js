@@ -101,7 +101,7 @@ function isPalindrome(myDate){
     const myArray = myDate.split('')
     let invertedDate = ""
 
-    for (i = 7; i > -1; i--){
+    for (i = myArray.length - 1; i > -1; i--){
         console.log(myArray[i])
         invertedDate += myArray[i]
         console.log(myArray[i])
@@ -117,16 +117,19 @@ function isPalindrome(myDate){
 }
 
 function game(){
-    const answer = isValidDate(textArea.value)
-    para.innerText = answer
+    if(isValidDate(textArea.value)){
+        para.innerText = "Date valide"
+    }
+    else{
+        para.innerText = "Pas une date valide"
+
+    }
     
-    if (answer){
-        if (isPalindrome(myDateInString)){
-            para2.innerText = "C'est un palindrome"
-        }
-        else{
-            para2.innerText = "Ce n'est pas un palindrome"
-        }
+    if (isPalindrome(textArea.value)){
+        para2.innerText = "C'est un palindrome"
+    }
+    else{
+        para2.innerText = "Ce n'est pas un palindrome"
     }
 }
 
