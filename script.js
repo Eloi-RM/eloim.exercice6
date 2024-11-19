@@ -1,3 +1,7 @@
+const textArea = document.querySelector('textarea')
+const button = document.querySelector('button')
+const para = document.querySelector('p')
+
 function isValidDate(myDate){
     const myArray = myDate.split('')
     let myDateInArray = []
@@ -88,4 +92,7 @@ function isValidDayAndMonth(myDay, myMonth){
     }
 }
 
-console.log(isValidDate('20/02/2001'))
+button.addEventListener('click', ()=> {
+    const answer = isValidDate(textArea.value)
+    para.innerText = answer
+})
