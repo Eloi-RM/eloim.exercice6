@@ -1,7 +1,10 @@
-const textArea = document.querySelector('textarea')
-const button = document.querySelector('button')
-const para = document.querySelector('p')
-const para2 = document.querySelector('p2')
+const textArea = document.querySelector('.text-area')
+const button = document.querySelector('.date-button')
+const para = document.querySelector('.valid-date')
+const para2 = document.querySelector('.palindrome')
+const para3 = document.querySelector('.future-palindrome')
+const nextButton = document.querySelector('.next-button')
+const input = document.querySelector('.input-number')
 
 let myDateInString = ""
 
@@ -48,7 +51,6 @@ function isValidDate(myDate){
                 return false
         }
     }
-    console.log("my string = " + myDateInString)
 
     if (myDateInString.length != 8){
         console.log("to long or to short")
@@ -102,10 +104,7 @@ function isPalindrome(myDate){
     let invertedDate = ""
 
     for (i = myArray.length - 1; i > -1; i--){
-        console.log(myArray[i])
         invertedDate += myArray[i]
-        console.log(myArray[i])
-        
     }
 
     if (invertedDate == myDate){
@@ -135,4 +134,58 @@ function game(){
 
 button.addEventListener('click', ()=> {
     game()
+})
+
+function future(amount){
+    para3.innerHTML = ""
+    let unit = 4
+    let dizaine = 2
+    let centaine = 0
+    let millier = 2 
+    
+    for (let i = 0; i < amount - 1; i++){   
+        let annee = ""
+        let palindromeDate = ""
+        
+        unit += 1
+        if (unit > 2){
+            unit = 0
+            dizaine += 1
+            if (dizaine > 9){
+                dizaine = 0
+                centaine += 1
+                if (centaine > 1){
+                    centaine = 0
+                    millier += 1
+                }
+            }
+        }
+        const unitString = unit.toString()
+        const dizaineString = dizaine.toString()
+        const centaineString = centaine.toString()
+        const millierString = millier.toString()
+        
+        annee = millierString + centaineString + dizaineString + unitString
+        console.log(annee)
+        
+        const myArray = annee.split('')
+        console.log(myArray)
+
+        
+        for (let j = myArray.length - 1; j > -1; j--){
+            if (j == 1){
+                palindromeDate += "/"
+            }
+            palindromeDate += myArray[j]
+            console.log(myArray[j], j)
+        }
+
+        palindromeDate += "/" + annee
+        console.log(palindromeDate)
+        para3.innerHTML += palindromeDate + "<br/>"
+    }
+}
+
+nextButton.addEventListener('click', ()=> {
+    future(input.value)
 })
