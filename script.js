@@ -1,10 +1,10 @@
 const textArea = document.querySelector('.text-area')
-const button = document.querySelector('.date-button')
-const para = document.querySelector('.valid-date')
-const para2 = document.querySelector('.palindrome')
-const para3 = document.querySelector('.future-palindrome')
-const nextButton = document.querySelector('.next-button')
-const input = document.querySelector('.input-number')
+const buttonExecute = document.querySelector('.button-execute')
+const paraValidDate = document.querySelector('.para-valid-date')
+const paraValidPalindrome = document.querySelector('.para-valid-palindrome')
+const paraFuturePalindrome = document.querySelector('.para-future-palindrome')
+const buttonFuturePalindrome = document.querySelector('.button-future-palindrome')
+const inputNumber = document.querySelector('.input-number')
 
 let myDateInString = ""
 
@@ -117,33 +117,33 @@ function isPalindrome(myDate){
 
 function game(){
     if(isValidDate(textArea.value)){
-        para.innerText = "Date valide"
+        paraValidDate.innerText = "Date valide"
     }
     else{
-        para.innerText = "Pas une date valide"
+        paraValidDate.innerText = "Pas une date valide"
 
     }
     
     if (isPalindrome(textArea.value)){
-        para2.innerText = "C'est un palindrome"
+        paraValidPalindrome.innerText = "C'est un palindrome"
     }
     else{
-        para2.innerText = "Ce n'est pas un palindrome"
+        paraValidPalindrome.innerText = "Ce n'est pas un palindrome"
     }
 }
 
-button.addEventListener('click', ()=> {
+buttonExecute.addEventListener('click', ()=> {
     game()
 })
 
 function future(amount){
-    para3.innerHTML = ""
+    paraFuturePalindrome.innerHTML = ""
     let unit = 4
     let dizaine = 2
     let centaine = 0
     let millier = 2 
     
-    for (let i = 0; i < amount - 1; i++){   
+    for (let i = 0; i < amount; i++){   
         let annee = ""
         let palindromeDate = ""
         
@@ -182,10 +182,10 @@ function future(amount){
 
         palindromeDate += "/" + annee
         console.log(palindromeDate)
-        para3.innerHTML += palindromeDate + "<br/>"
+        paraFuturePalindrome.innerHTML += palindromeDate + "<br/>"
     }
 }
 
-nextButton.addEventListener('click', ()=> {
-    future(input.value)
+buttonFuturePalindrome.addEventListener('click', ()=> {
+    future(inputNumber.value)
 })
