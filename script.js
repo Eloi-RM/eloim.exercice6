@@ -6,60 +6,36 @@ const paraFuturePalindrome = document.querySelector('.para-future-palindrome')
 const buttonFuturePalindrome = document.querySelector('.button-future-palindrome')
 const inputNumber = document.querySelector('.input-number')
 
-let myDateInString = ""
 
-function isValidDate(myDate){
-    myDateInString = ""
-    
-    const myArray = myDate.split('')
-    console.log(myArray)
-    
-    const slashSplitArray = myDate.split('/')
-    console.log(slashSplitArray)
+function isValidDate(myDate){    
+    const slashSplittedDate = myDate.split('/')
+    console.log(slashSplittedDate)
 
-    if (isValidDayAndMonth(parseInt(slashSplitArray[0]), slashSplitArray[1])){
+    for (i = 0; i < slashSplittedDate.length; i++){
+        if (isNaN(parseInt(slashSplittedDate[i]))){
+            return false
+        }
+    }
+
+    if (isValidDayAndMonth(parseInt(slashSplittedDate[0]), slashSplittedDate[1])){
         console.log("valid day and month")
     }
     else{
         console.log("not a valid day or month")
         return false
     }
-
-    if (myArray[2] != '/' || myArray[5] != '/'){
-        console.log("not the valid format")
-        return false
-    }
-    
-    for (let i = 0; i < myArray.length; i++){
-        switch (myArray[i]){
-            case '0' :
-            case '1' :
-            case '2' :
-            case '3' :    
-            case '4' :
-            case '5' :
-            case '6' :
-            case '7' :
-            case '8' :
-            case '9' :
-                myDateInString += myArray[i]
-                break
-            case '/' :
-                break
-            default :
-                console.log("not a number")
-                return false
-        }
-    }
-
-    if (myDateInString.length != 8){
-        console.log("to long or to short")
-        return false
-    }
-    else{
-        console.log("valid date")
-        return true
-    }
+    // if (myArray[2] != '/' || myArray[5] != '/'){
+    //     console.log("not the valid format")
+    //     return false
+    // }
+    // if (myDate.length != 10){
+    //     console.log("to long or to short")
+    //     return false
+    // }
+    // else{
+    //     console.log("valid date")
+    //     return true
+    // }
 }
 
 function isValidDayAndMonth(myDay, myMonth){
@@ -99,20 +75,37 @@ function isValidDayAndMonth(myDay, myMonth){
     }
 }
 
-function isPalindrome(myDate){
-    const myArray = myDate.split('')
-    let invertedDate = ""
+function isPalindrome(myString){
+    myString = removeSlash(myString)
+    
+    const splittedString = myString.split('')
+    let invertedString = ""
 
-    for (i = myArray.length - 1; i > -1; i--){
-        invertedDate += myArray[i]
+    for (i = splittedString.length - 1; i > -1; i--){
+        invertedString += splittedString[i]
     }
 
-    if (invertedDate == myDate){
+    if (invertedString == myString){
         return true
     }
     else{
         return false
     }
+}
+
+function removeSlash(myString){
+    const splittedString = myString.split('')
+    const cleanString = ""
+
+    for (let i = 0; i < splittedString.length; i++){
+    switch (splittedString[i]){
+        case '/' :
+            break
+        default :
+            cleanString += splittedString[i]
+    }
+    }
+    return cleanString
 }
 
 function game(){
