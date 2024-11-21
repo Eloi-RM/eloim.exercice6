@@ -36,6 +36,7 @@ function isValidDate(myDate){
     //     console.log("valid date")
     //     return true
     // }
+    return true
 }
 
 function isValidDayAndMonth(myDay, myMonth){
@@ -95,7 +96,7 @@ function isPalindrome(myString){
 
 function removeSlash(myString){
     const splittedString = myString.split('')
-    const cleanString = ""
+    let cleanString = ""
 
     for (let i = 0; i < splittedString.length; i++){
     switch (splittedString[i]){
@@ -108,7 +109,7 @@ function removeSlash(myString){
     return cleanString
 }
 
-function game(){
+function execute(){
     if(isValidDate(textArea.value)){
         paraValidDate.innerText = "Date valide"
     }
@@ -126,18 +127,18 @@ function game(){
 }
 
 buttonExecute.addEventListener('click', ()=> {
-    game()
+    execute()
 })
 
-function future(amount){
+function displayNextPalindrome(amount){
     paraFuturePalindrome.innerHTML = ""
     let unit = 4
-    let dizaine = 2
+    let dizaine = 2 //écris en français pour la lisibilité
     let centaine = 0
     let millier = 2 
     
     for (let i = 0; i < amount; i++){   
-        let annee = ""
+        let year = ""
         let palindromeDate = ""
         
         unit += 1
@@ -153,32 +154,28 @@ function future(amount){
                 }
             }
         }
+
         const unitString = unit.toString()
         const dizaineString = dizaine.toString()
         const centaineString = centaine.toString()
         const millierString = millier.toString()
         
-        annee = millierString + centaineString + dizaineString + unitString
-        console.log(annee)
+        year = millierString + centaineString + dizaineString + unitString
         
-        const myArray = annee.split('')
-        console.log(myArray)
-
+        const splittedYear = year.split('')
         
-        for (let j = myArray.length - 1; j > -1; j--){
+        for (let j = splittedYear.length - 1; j > -1; j--){
             if (j == 1){
                 palindromeDate += "/"
             }
-            palindromeDate += myArray[j]
-            console.log(myArray[j], j)
+            palindromeDate += splittedYear[j]
         }
 
-        palindromeDate += "/" + annee
-        console.log(palindromeDate)
+        palindromeDate += "/" + year
         paraFuturePalindrome.innerHTML += palindromeDate + "<br/>"
     }
 }
 
 buttonFuturePalindrome.addEventListener('click', ()=> {
-    future(inputNumber.value)
+    displayNextPalindrome(inputNumber.value)
 })
